@@ -1,3 +1,180 @@
+## -------------PARA CREAR Y HACER FUNCIONAR EL PROYECTO---------
+
+
+## ----Previamente tener instalado  Composer 
+## ----Previamente tener instalado  PHP (yo estoy usando la version 8.2)
+## ----Previamente tener instalado  Apache o cualquier gestor que administre los recursos como XAMPP O MAMP (yo estoy usando APACHE BASE + nginx)
+
+
+## ----Al no tener la carpeta vendor por defecto en el repositorio hay que crearla en la terminal con:
+
+```
+composer install
+```
+
+Vemos cómo se ha creado la carpeta vendor.
+
+## ----También debemos instalar las dependencias de NPM definidas en el archivo package.json con:
+
+```
+npm install
+```
+
+Y en esta ocasión vemos cómo se crea la carpeta node_modules.
+
+
+## ----Crear una base de datos que soporte Laravel
+Entre las bases de datos que soporta Laravel por defecto, encontramos: MySQL, SQL Lite, PostgreSQL y SQL Server.
+----En mi caso estoy usando MYSQL y esta es la estructura para crear mis tablas.
+
+```
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+DROP TABLE IF EXISTS `access_tokens`;
+CREATE TABLE `access_tokens` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `access_tokens_token_unique` (`token`),
+  KEY `access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `catalog_products`;
+CREATE TABLE `catalog_products` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `height` int NOT NULL,
+  `length` int NOT NULL,
+  `width` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `photo` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `failed_jobs`;
+CREATE TABLE `failed_jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `password_reset_tokens`;
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `password_resets`;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `img_profile` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `rememberToken` varchar(255) DEFAULT NULL,
+  `created_at` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `updated_at` varchar(255) DEFAULT NULL,
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `catalog_products` (`id`, `name`, `description`, `height`, `length`, `width`, `created_at`, `updated_at`, `photo`) VALUES
+(17, 'Celular xiomi', 'Celular Xiomii Redmi note 10 con 256Gb de almacenamiento interno y 6 gb de Ram', 15, 15, 15, '2024-07-31 19:52:36', '2024-07-31 19:52:36', 2500);
+
+
+INSERT INTO `users` (`id`, `name`, `phone`, `img_profile`, `password`, `rememberToken`, `created_at`, `updated_at`) VALUES
+(1, 'Ernesto Jahir Rodriguez Ramirez', '8112731728', 'img/users/azXnJ8No8xpo9OBCxVUGBbE3XkkjDAsHNn422lOI.png', '$2y$10$N94vkToLLhA5Ni89FU4SIe3iGyd94NhPxKb1poJPyFr2scbOrkfDK', NULL, '2024-07-31 03:26:47', '2024-07-31 03:26:47');
+INSERT INTO `users` (`id`, `name`, `phone`, `img_profile`, `password`, `rememberToken`, `created_at`, `updated_at`) VALUES
+(10, 'Prueba', '8121850577', 'img/users/22ck5fpiP6gvrYwwFn4XviDvlPplUvAELVrbzs7Y.png', '$2y$10$rFGHeSuK02bRa0oEGwrwNuGfLnFWgAvWJQAxn/sTQgGdGd38uNJva', NULL, '2024-07-31 19:51:35', '2024-07-31 19:51:35');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+```
+
+## Crear el archivo .env
+Como por cuestiones de seguridad tampoco se subió, necesitamos crearlo.
+
+Podemos duplicar el archivo .env.example, renombrarlo a .env e incluir los datos de conexión de la base de datos que indicamos en el paso anterior.
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ernesto_jahir_rodriguez_ramirez
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+
+## --Generar una clave
+La clave de aplicación es una cadena aleatoria almacenada en la clave APP_KEY dentro del archivo .env. Notarás que también falta.
+
+Para crear la nueva clave e insertarla automáticamente en el .env, ejecutaremos:
+
+```
+php artisan key:generate
+```
+
+
+## -----Para finalizar correremos desde la terminal el codigo para actualizar las dependencias y se puedan ejecutar en nuestro proyecto laravel.
+
+```
+php artisan update
+```
+
+## ----terminado el proceso corremos el siguiente comando para correr el proyecto y visualizar.
+
+```
+php artisan route serve
+```
+
+listo ya tendriamos mi proyecto instlaado.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
