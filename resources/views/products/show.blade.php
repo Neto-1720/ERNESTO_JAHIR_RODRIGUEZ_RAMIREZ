@@ -44,7 +44,7 @@
     </div>
     
     <div class="form-group">
-        <label for="photo" class="form-label">{{ __('Foto') }}</label>
+        <label for="photo" class="form-label">{{ __('Precio:') }}</label>
         <div class="col-sm-4">
             <input type="text" name="photo" class="form-control" id="photo"  value="{{ $catalogProduct->photo }}" placeholder="" readonly>
          </div>

@@ -50,10 +50,10 @@
         </div>
 
         <div class="form-group">
-            <label for="photo" class="form-label">{{ __('Foto') }}</label>
+            <label for="photo" class="form-label">{{ __('Precio:') }}</label>
             <div class="col-sm-4">
             <input type="text" name="photo" class="form-control @error('photo') is-invalid @enderror"
-                value="{{ old('photo', $catalogProduct?->photo) }}" id="photo" placeholder="Ingresar Foto">
+                value="{{ old('photo', $catalogProduct?->photo) }}" id="photo" placeholder="Ingresar Precio:">
             {!! $errors->first('photo', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>')
             !!}
              </div>

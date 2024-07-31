@@ -36,7 +36,7 @@
                                 <th>Altura</th>
                                 <th>Longitud</th>
                                 <th>Ancho </th>
-                                <th style="display:none;">Foto</th>
+                                <th>Precio</th>
                                 <th>Opciones</th>
                             </tr>
                         </thead>
@@ -49,7 +49,7 @@
                                 <td>{{ $product->height }} cm</td>
                                 <td>{{ $product->length }} cm</td>
                                 <td>{{ $product->width }} cm</td>
-                                <td style="display:none;">{{ $product->photo }} </td>
+                                <td>$ {{ $product->photo }} </td>
 
                                 <td>
                                     <form action="{{ route('products.destroy',$product->id) }}" method="POST">
