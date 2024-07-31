@@ -33,4 +33,5 @@
             </div>
         </div>
     </section>
+    <script src="/validate-products.js"></script>
 @endsection
