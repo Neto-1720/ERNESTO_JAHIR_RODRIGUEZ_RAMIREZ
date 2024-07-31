@@ -1,0 +1,210 @@
+
+/* Estilos de el inicio de sesion asi como del registro */
+html, body {
+    width: 100%;
+    height: 100%;
+  }
+  body {
+    background:radial-gradient(ellipse at center, rgb(7, 7, 7) 0%, rgb(77, 74, 74) 35%, #060606 100%);
+    overflow: hidden;
+  }
+   
+  /* Estilo de sección de inicio de sesión */
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: -20px 0 50px;
+    margin-top: 20px;
+  }
+  
+  h1 {
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: .5px;
+    margin: 20px 0 30px;
+  }
+  
+  a {
+    color: #0b0e0b;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
+  }
+  
+  .container {
+    background: #fff;
+    border-radius: 90px;
+    box-shadow: 30px 14px 28px rgba(0, 0, 5, .2), 0 10px 10px rgba(0, 0, 0, .2);
+    position: relative;
+    overflow: hidden;
+    opacity: 85%;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+    transition: 333ms;
+  }
+  
+  
+  .form-container form {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    padding:  0 50px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  
+  .form-container input {
+    background: #eee;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+  }
+  .form-container input:hover {
+    transform: scale(101%);
+  }
+  /* Estilos de el boton */
+  button {
+    border-radius: 50px;
+    box-shadow: 0 1px 1px ;
+    border: 1px solid #0b0b0b;
+    background: #0b0b0b;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+  }
+  
+  button:active {
+    transform: scale(.95);
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  button.ghost {
+    background: transparent;
+    border-color: #fff;
+  }
+  
+  .form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all .6s ease-in-out;
+  }
+  
+  .sign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+  }
+  
+  .sign-up-container {
+    left: 0;
+    width: 50%;
+    z-index: 1;
+    opacity: 0;
+  }
+  
+  .overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform .6s ease-in-out;
+    z-index: 100;
+  }
+  
+  .overlay {
+    background: #ff416c;
+    background: linear-gradient(to right, #090a0a, #101111) no-repeat 0 0 / cover;
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateY(0);
+    transition: transform .6s ease-in-out;
+  }
+
+  .overlay-panel {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    transform: translateY(0);
+    transition: transform .6s ease-in-out;
+  }
+  
+  .overlay-right {
+    right: 0;
+    transform: translateY(0);
+  }
+  
+  .overlay-left {
+    transform: translateY(-20%);
+  }
+  
+  /* Mover el inicio de sesión a la derecha */
+  .container.right-panel-active .sign-in-container {
+    transform: translateY(100%);
+  }
+  
+  /* Mover superposición a la izquierda */
+  .container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+  }
+  
+  /* Traer el registro al inicio de sesión */
+  .container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+  }
+  
+  /* Mover de nuevo a la derecha */
+  .container.right-panel-active .overlay {
+    transform: translateX(50%);
+  }
+  
+  /* Devolver el texto al centro. */
+  .container.right-panel-active .overlay-left {
+    transform: translateY(0);
+  }
+  
+  /* Mismo efecto para la derecha */
+  .container.right-panel-active .overlay-right {
+    transform: translateY(20%);
+  }
